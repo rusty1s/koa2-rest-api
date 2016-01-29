@@ -1,7 +1,7 @@
 {
   "name": "koa2-oauth2-rest-api",
   "version": "1.0.0",
-  "description": "Starter project for an ES6 RESTFul Koa2 API with Mongoose and OAuth2",
+  "description": "Starter project for an ES6 RESTFul Koa2 API with Sequelize and OAuth2",
   "keywords": [
     "node",
     "es6",
@@ -11,7 +11,9 @@
     "koa2",
     "rest",
     "api",
-    "mongoose",
+    "sequelize",
+    "sql",
+    "postgres",
     "oauth2"
   ],
   "author": {
@@ -53,6 +55,9 @@
     "koa": "^2.0.0-alpha.3",
     "koa-helmet": "^2.0.0-alpha.1",
     "koa-logger": "^2.0.0",
-    "koa-router": "^7.0.1"
+    "koa-router": "^7.0.1",
+    "pg": "^4.4.4",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.18.0"
   }
 }

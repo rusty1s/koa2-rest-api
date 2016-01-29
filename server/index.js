@@ -14,7 +14,7 @@ const router = new Router({
   prefix: '/api',
 });
 
-router.get('/', function (ctx, next) {
+router.get('/', async ctx => {
   ctx.body = { message: 'api call' };
 });
 

@@ -3,4 +3,4 @@
 require('babel-register');
 require('babel-polyfill');
 
-require('./bin/run');
+require('./bin/www');
