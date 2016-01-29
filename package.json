@@ -1,0 +1,51 @@
+{
+  "name": "koa2-oauth2-rest-api",
+  "version": "0.0.0",
+  "description": "Starter project for an ES6 RESTFul Koa2 API with Mongoose and OAuth2",
+  "keywords": [
+    "node",
+    "es6",
+    "es2015",
+    "koa",
+    "koa2",
+    "rest",
+    "api",
+    "mongoose",
+    "oauth2"
+  ],
+  "author": {
+    "name": "Matthias Fey",
+    "email": "matthias.fey@tu-dortmund.de",
+    "url": "http://rusty1s.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rusty1s/koa2-oauth2-rest-api.git"
+  },
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "http://github.com/rusty1s/koa2-oauth2-rest-api/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "eslint index.js server/**",
+    "start": "node index.js",
+    "test": "mocha server/test"
+  },
+  "devDependencies": {
+    "eslint": "*",
+    "eslint-config-airbnb": "*"
+  },
+  "dependencies": {
+    "babel-register": "*",
+    "babel-preset-es2015": "*",
+    "http": "*"
+  }
+}
