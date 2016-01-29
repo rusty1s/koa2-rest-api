@@ -51,6 +51,8 @@
   },
   "dependencies": {
     "koa": "^2.0.0-alpha.3",
-    "koa-logger": "^2.0.0"
+    "koa-helmet": "^2.0.0-alpha.1",
+    "koa-logger": "^2.0.0",
+    "koa-router": "^7.0.1"
   }
 }
