@@ -3,9 +3,9 @@
 import http from 'http';
 import app from '../server';
 
-app.server = http.createServer();
+const httpServer = http.createServer(app.callback());
 
 const port = 3000;
-app.server.listen(
-    process.env.PORT || port,
-    () => console.log(`Server started on port ${app.server.address().port}`));
+httpServer.listen(
+  process.env.PORT || port,
+  () => console.log(`Server started on port ${httpServer.address().port}`));

@@ -47,7 +47,6 @@
     "babel-register": "*",
     "eslint": "*",
     "eslint-config-airbnb": "*",
-    "koa-logger": "^2.0.0",
     "nodemon": "*"
   },
   "dependencies": {
