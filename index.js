@@ -1,4 +1,6 @@
 'use strict';
 
 require('babel-register');
-require('./server');
+require('babel-polyfill');
+
+require('./bin/run');

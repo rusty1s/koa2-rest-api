@@ -1,11 +1,12 @@
 {
   "name": "koa2-oauth2-rest-api",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Starter project for an ES6 RESTFul Koa2 API with Mongoose and OAuth2",
   "keywords": [
     "node",
     "es6",
     "es2015",
+    "babel",
     "koa",
     "koa2",
     "rest",
@@ -35,17 +36,22 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "eslint index.js server/**",
-    "start": "node index.js",
-    "test": "mocha server/test"
+    "build": "eslint index.js server/** bin/**",
+    "start": "nodemon index.js"
   },
   "devDependencies": {
+    "babel-eslint": "*",
+    "babel-polyfill": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-stage-0": "*",
+    "babel-register": "*",
     "eslint": "*",
-    "eslint-config-airbnb": "*"
+    "eslint-config-airbnb": "*",
+    "koa-logger": "^2.0.0",
+    "nodemon": "*"
   },
   "dependencies": {
-    "babel-register": "*",
-    "babel-preset-es2015": "*",
-    "http": "*"
+    "koa": "^2.0.0-alpha.3",
+    "koa-logger": "^2.0.0"
   }
 }
