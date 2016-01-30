@@ -7,11 +7,11 @@ import helmet from 'koa-helmet';
 import cors from 'koa-cors';
 import bodyParser from 'koa-bodyparser';
 
-export default function middleware() {
+export default () => {
   return compose([
     logger(),
     helmet(), // set HTTP headers (e.g. remove x-powered-by)
     convert(cors()), // enable cors
     convert(bodyParser()),
   ]);
-}
+};

@@ -2,21 +2,24 @@
 
 import compose from 'koa-compose';
 import Router from 'koa-router';
+import requireDir from 'require-dir';
 
 import db from '../db';
 
-export default function api() {
+const routes = requireDir('./routes');
+
+export default () => {
   const router = new Router({
     prefix: '/api',
   });
 
-  router.get('/test', async ctx => {
-    const users = await db.User.findAll();
-    ctx.body = users;
+  Object.keys(routes).forEach(name => {
+    const route = routes[name];
+    route.default(router, db);
   });
 
   return compose([
     router.routes(),
     router.allowedMethods(),
   ]);
-}
+};

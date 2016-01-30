@@ -14,7 +14,7 @@ const db = { sequelize, Sequelize };
 
 // register models
 Object.keys(models).forEach(name => {
-  const model = sequelize.import(name, models[name]);
+  const model = sequelize.import(name, models[name].default);
   db[model.name] = model;
 });
 
