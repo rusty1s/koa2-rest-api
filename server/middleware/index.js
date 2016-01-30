@@ -8,7 +8,6 @@ import cors from 'koa-cors';
 import bodyParser from 'koa-bodyparser';
 
 export default function middleware() {
-
   return compose([
     logger(),
     helmet(), // set HTTP headers (e.g. remove x-powered-by)

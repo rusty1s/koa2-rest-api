@@ -6,7 +6,6 @@ import Router from 'koa-router';
 import db from '../db';
 
 export default function api() {
-
   const router = new Router({
     prefix: '/api',
   });
