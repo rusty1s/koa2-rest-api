@@ -54,6 +54,7 @@
   "dependencies": {
     "koa": "^2.0.0-alpha.3",
     "koa-bodyparser": "^2.0.1",
+    "koa-compose": "^3.0.0",
     "koa-convert": "^1.2.0",
     "koa-cors": "0.0.16",
     "koa-helmet": "^2.0.0-alpha.1",
@@ -61,6 +62,7 @@
     "koa-router": "^7.0.1",
     "pg": "^4.4.4",
     "pg-hstore": "^2.3.2",
+    "require-dir": "^0.3.0",
     "sequelize": "^3.18.0"
   }
 }
