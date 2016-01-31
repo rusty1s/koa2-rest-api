@@ -1,14 +1,14 @@
 'use strict';
 
+import requireDir from 'require-dir';
 import compose from 'koa-compose';
 import Router from 'koa-router';
-import requireDir from 'require-dir';
 
 import db from '../db';
 
 const routes = requireDir('./routes');
 
-export default () => {
+export default function api() {
   const router = new Router({
     prefix: '/api',
   });
@@ -22,4 +22,4 @@ export default () => {
     router.routes(),
     router.allowedMethods(),
   ]);
-};
+}
