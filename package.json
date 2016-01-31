@@ -38,8 +38,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "eslint index.js server/** bin/**",
-    "start": "nodemon index.js"
+    "build": "eslint index.js server/** bin/** test/**",
+    "start": "nodemon index.js",
+    "test": "mocha test"
   },
   "devDependencies": {
     "babel-eslint": "*",
@@ -49,7 +50,9 @@
     "babel-register": "*",
     "eslint": "*",
     "eslint-config-airbnb": "*",
-    "nodemon": "*"
+    "mocha": "^2.4.5",
+    "nodemon": "*",
+    "supertest-as-promised": "^2.0.2"
   },
   "dependencies": {
     "koa": "^2.0.0-alpha.3",

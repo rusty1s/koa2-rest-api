@@ -5,5 +5,8 @@
     "no-console": 0,
     "max-len": [1, 80, 2],
     "no-param-reassign": [2, { "props": false }]
+  },
+  "env": {
+    "mocha": true
   }
 }

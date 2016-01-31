@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 'use strict';
 
 import http from 'http';
@@ -9,7 +7,9 @@ import db from '../server/db';
 const port = 3000;
 
 (async() => {
-  await db.sequelize.sync();
+  await db.sequelize.sync({
+    force: true,
+  });
 
   const httpServer = http.createServer(app.callback());
 
