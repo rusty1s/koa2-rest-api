@@ -1,5 +1,5 @@
 {
-  "name": "koa2-oauth2-rest-api",
+  "name": "koa2-sql-rest-api",
   "version": "0.0.0",
   "description": "Starter project for an ES6 RESTFul Koa2 API with Sequelize and OAuth2",
   "keywords": [
@@ -9,11 +9,17 @@
     "babel",
     "koa",
     "koa2",
+    "koa v2"
     "rest",
     "api",
-    "sequelize",
     "sql",
+    "sequelize",
     "postgres",
+    "authentification",
+    "authorization",
+    "facebook",
+    "google",
+    "twitter",
     "oauth2"
   ],
   "author": {
