@@ -1,7 +1,7 @@
 {
-  "name": "koa2-sql-oauth2-rest-api",
+  "name": "koa2-rest-api",
   "version": "0.0.0",
-  "description": "Starter project for an ES6 RESTFul Koa2 API with Sequelize and OAuth2",
+  "description": "Starter project for an ES6 RESTFul Koa2 API with Mongoose and OAuth2",
   "keywords": [
     "node",
     "es6",
@@ -12,11 +12,12 @@
     "koa v2",
     "rest",
     "api",
-    "sql",
-    "sequelize",
-    "postgres",
+    "mongo",
+    "mongodb",
+    "mongoose",
     "authentification",
     "authorization",
+    "basic",
     "facebook",
     "google",
     "twitter",
@@ -29,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/rusty1s/koa2-sql-oauth2-rest-api.git"
+    "url": "git://github.com/rusty1s/koa2-rest-api.git"
   },
   "license": "MIT",
   "licenses": [
@@ -40,7 +41,7 @@
   ],
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "http://github.com/rusty1s/koa2-sql-oauth2-rest-api/issues"
+    "url": "http://github.com/rusty1s/koa2-rest-api/issues"
   },
   "main": "index.js",
   "scripts": {
@@ -71,10 +72,6 @@
     "koa-logger": "^2.0.0",
     "koa-passport": "^2.0.1",
     "koa-router": "^7.0.1",
-    "passport-http": "^0.3.0",
-    "pg": "^4.4.4",
-    "pg-hstore": "^2.3.2",
-    "require-dir": "^0.3.0",
-    "sequelize": "^3.18.0"
+    "passport-http": "^0.3.0"
   }
 }

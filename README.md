@@ -1,3 +1,3 @@
-# ES6 RESTFul Koa2 API with Sequelize and OAuth2
+# Starter project for an ES6 RESTFul Koa2 API with Mongoose and OAuth2
 
 currently in development...
