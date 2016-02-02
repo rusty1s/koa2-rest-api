@@ -9,7 +9,7 @@
     "babel",
     "koa",
     "koa2",
-    "koa v2"
+    "koa v2",
     "rest",
     "api",
     "sql",
@@ -56,9 +56,10 @@
     "babel-register": "*",
     "eslint": "*",
     "eslint-config-airbnb": "*",
-    "mocha": "^2.4.5",
+    "mocha": "*",
     "nodemon": "*",
-    "supertest-as-promised": "^2.0.2"
+    "supertest": "*",
+    "supertest-as-promised": "*"
   },
   "dependencies": {
     "koa": "^2.0.0-alpha.3",
@@ -68,7 +69,9 @@
     "koa-cors": "0.0.16",
     "koa-helmet": "^2.0.0-alpha.1",
     "koa-logger": "^2.0.0",
+    "koa-passport": "^2.0.1",
     "koa-router": "^7.0.1",
+    "passport-http": "^0.3.0",
     "pg": "^4.4.4",
     "pg-hstore": "^2.3.2",
     "require-dir": "^0.3.0",
