@@ -1,46 +1,17 @@
 'use strict';
 
-import provider from '../auth/config';
+import mongoose from 'mongoose';
 
-export default function user(sequelize, DataTypes) {
-  return sequelize.define('User', {
-    username:
-    {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [3, undefined],
-      },
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isEmail: true,
-      },
-    },
-    hashedPassword: DataTypes.STRING,
-    admin: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
-    provider: {
-      type: DataTypes.STRING,
-      validate: {
-        isSupportedProvider(value) {
-          if (~provider.indexOf(value)) {
-            throw new Error('No supported provider!');
-          }
-        },
-      },
-    },
-  }, {
-    indexes: [
-      {
-        unique: true,
-        fields: ['email'],
-      },
-    ],
-  });
-}
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    trim: true,
+    required: true,
+    minlength: 3,
+  },
+}, {
+  versionKey: false,
+  timestamps: true,
+});
+
+export default mongoose.model('User', userSchema);

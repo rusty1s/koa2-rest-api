@@ -1,21 +1,19 @@
 'use strict';
 
-import http from 'http';
 import app from '../server';
 import db from '../server/db';
-
-const port = 3000;
+import { development } from '../server/db/config';
 
 (async() => {
-  await db.sequelize.sync({
-    force: true,
-  });
+  try {
+    const info = await db(development);
+    console.log(`Connected to ${info.host}:${info.port}/${info.name}`);
+  } catch (error) {
+    console.error('Unable to connect to database');
+  }
 
-  const httpServer = http.createServer(app.callback());
+  const port = process.env.PORT || 3000;
 
-  httpServer.listen(
-    process.env.PORT || port,
-    () => console.log(`Server started on port ${httpServer.address().port}`));
+  await app.listen(port);
+  console.log(`Server started on port ${port}`);
 })();
-
-// mongoose with co?

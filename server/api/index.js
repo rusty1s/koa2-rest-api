@@ -1,22 +1,17 @@
 'use strict';
 
-import requireDir from 'require-dir';
 import compose from 'koa-compose';
 import Router from 'koa-router';
+import importDir from 'import-dir';
 
-import db from '../db';
-
-const routes = requireDir('./routes');
+const routes = importDir('./routes');
 
 export default function api() {
   const router = new Router({
     prefix: '/api',
   });
 
-  Object.keys(routes).forEach(name => {
-    const route = routes[name];
-    route.default(router, db);
-  });
+  Object.keys(routes).forEach(name => routes[name](router));
 
   return compose([
     router.routes(),
