@@ -63,7 +63,7 @@
     "supertest-as-promised": "*"
   },
   "dependencies": {
-    "bcrypt-as-promised": "^1.1.0",
+    "bcrypt": "^0.8.5",
     "import-dir": "0.0.1",
     "koa": "^2.0.0-alpha.3",
     "koa-bodyparser": "^2.0.1",
@@ -75,6 +75,7 @@
     "koa-passport": "^2.0.1",
     "koa-router": "^7.0.1",
     "mongoose": "^4.3.7",
+    "mongoose-id-validator": "^0.1.10",
     "mongoose-validator": "^1.2.4",
     "passport-http": "^0.3.0"
   }

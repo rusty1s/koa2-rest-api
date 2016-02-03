@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 import validate from 'mongoose-validator';
-import bcrypt from 'bcrypt-as-promised';
+import { encrypt } from '../helpers/crypt';
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -24,35 +24,29 @@ const userSchema = new mongoose.Schema({
   hashedPassword: {
     type: String,
   },
+  admin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 }, {
   versionKey: false,
   timestamps: true,
 });
 
-userSchema
-  .virtual('password')
+userSchema.virtual('password')
   .set(function setPassword(value) { this._password = value; })
   .get(function getPassword() { return this._password; });
 
-userSchema
-  .pre('save', async function preSave(next) {
-    if (!this.password) return next();
+userSchema.pre('save', async function preSave(next) {
+  if (!this.password) return next();
 
-    try {
-      const salt = await bcrypt.genSalt(10);
-      this.hashedPassword = await bcrypt.hash(this.password, salt);
-      next();
-    } catch (error) {
-      next(error);
-    }
-  });
-
-userSchema.methods = {
-  async verifyPassword(password) {
-    if (!this.hashedPassword) return false;
-
-    return await bcrypt.compare(password, this.hashedPassword);
-  },
-};
+  try {
+    this.hashedPassword = await encrypt(this.password);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 export default mongoose.model('User', userSchema);
