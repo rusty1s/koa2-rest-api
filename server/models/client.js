@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 import idValidator from 'mongoose-id-validator';
-import { encrypt } from '../helpers/crypt';
+import { encrypt } from '../helpers/crypt';
 
 const clientSchema = new mongoose.Schema({
   name: {
@@ -11,15 +11,15 @@ const clientSchema = new mongoose.Schema({
     required: true,
   },
   id: {
-  	type: String,
-  	required: true,
+    type: String,
+    required: true,
   },
   hashedSecret: {
-  	type: String,
-  	required: true,
+    type: String,
+    required: true,
   },
   user: {
-  	type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
@@ -35,9 +35,9 @@ clientSchema.virtual('secret')
   .get(function getSecret() { return this._secret; });
 
 clientSchema.pre('save', async function preSave(next) {
-	if (!this.secret) return next();
+  if (!this.secret) return next();
 
-	try {
+  try {
     this.hashedSecret = await encrypt(this.secret);
     next();
   } catch (error) {

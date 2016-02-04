@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 import validate from 'mongoose-validator';
-import { encrypt } from '../helpers/crypt';
+import { encrypt } from '../helpers/crypt';
 
 const userSchema = new mongoose.Schema({
   name: {

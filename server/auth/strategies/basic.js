@@ -9,7 +9,9 @@ export default new BasicStrategy(async (email, password, done) => {
     const user = await User.findOne({ email: email.toLowerCase() });
 
     if (!user) return done(null, false);
-    if (!(await verifyHash(user.hashedPassword, password))) return done(null, false);
+
+    const isMatch = await verifyHash(user.hashedPassword, password);
+    if (!isMatch) return done(null, false);
 
     return done(null, user);
   } catch (error) {
