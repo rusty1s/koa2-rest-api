@@ -1,16 +1,30 @@
 'use strict';
 
 import passport from 'koa-passport';
+import compose from 'koa-compose';
 import importDir from 'import-dir';
+import User from '../models/user';
 
 const strategies = importDir('./strategies');
 
-export default function auth() {
-  Object.keys(strategies).forEach(name => {
-    passport.use(name, strategies[name]);
-  });
+Object.keys(strategies).forEach(name => {
+  passport.use(name, strategies[name]);
+});
 
-  return passport.initialize();
+passport.serializeUser((user, done) => done(null, user._id));
+
+passport.deserializeUser((id, done) => {
+  (async () => {
+    const user = await User.findById(id);
+    done(null, user);
+  })();
+});
+
+export default function auth() {
+  return compose([
+    passport.initialize(),
+    passport.session(),
+  ]);
 }
 
 export function isClientAuthenticated() {
@@ -18,5 +32,5 @@ export function isClientAuthenticated() {
 }
 
 export function isBearerAuthenticated() {
-  return passport.authenticate('bearer', { sessio: false });
+  return passport.authenticate('bearer', { session: false });
 }

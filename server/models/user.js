@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
       message: 'Email address is not valid',
     }),
   },
-  hashedPassword: {
+  hashed_password: {
     type: String,
   },
   admin: {
@@ -42,7 +42,7 @@ userSchema.pre('save', async function preSave(next) {
   if (!this.password) return next();
 
   try {
-    this.hashedPassword = await encrypt(this.password);
+    this.hashed_password = await encrypt(this.password);
     next();
   } catch (error) {
     next(error);

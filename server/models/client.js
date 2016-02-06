@@ -15,12 +15,12 @@ const clientSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
-  grant: {
+  grant_type: {
     type: String,
     required: true,
     default: 'password',
   },
-  hashedSecret: {
+  hashed_secret: {
     type: String,
   },
   user: {
@@ -47,7 +47,7 @@ clientSchema.pre('save', async function preSave(next) {
   if (!this.secret) return next();
 
   try {
-    this.hashedSecret = await encrypt(this.secret);
+    this.hashed_secret = await encrypt(this.secret);
     next();
   } catch (error) {
     next(error);

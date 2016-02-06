@@ -19,7 +19,7 @@ const accessTokenSchema = new mongoose.Schema({
     ref: 'Client',
     required: true,
   },
-  createdAt: {
+  created_at: {
     type: Date,
     expires: 3600,
     default: Date.now(),

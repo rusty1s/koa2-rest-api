@@ -5,50 +5,42 @@ import Client from '../models/client';
 import User from '../models/user';
 import AccessToken from '../models/access-token';
 import uuid from 'uuid';
+import compose from 'koa-compose';
 import { verifyHash } from '../helpers/crypt';
+import { isClientAuthenticated } from '../auth';
 
 const server = oauth2orize.createServer();
 
 server.serializeClient(client => client._id);
 server.deserializeClient(async id => await Client.findById(id));
 
-server.exchange(oauth2orize.exchange.password(async (client, email, password) => {
-  console.log(client);
+server.exchange(
+  oauth2orize.exchange.password(async (client, email, password) => {
+    const user = await User.findOne({ email: email.toLowerCase() });
 
-  const localClient = await Client.findOne({ id: client.clientId });
+    if (!user) return false;
 
-  if (!localClient) return false;
-  if (!localClient.grant !== 'password') return false;
+    const isMatch = await verifyHash(user.hashed_password, password);
+    if (!isMatch) return false;
 
-  let isMatch = await verifyHash(
-    localClient.hashedSecret,
-    client.clientSecret
-  );
-  if (!isMatch) return false;
+    const accessToken = uuid.v4();
+    await AccessToken.create({
+      token: accessToken,
+      user: user._id,
+      client: client._id,
+    });
 
-  const user = await User.findOne({ email: email.toLowerCase() });
+    return accessToken;
+  }));
 
-  if (!user) return false;
-
-  isMatch = await verifyHash(user.hashedPassword, password);
-  if (!isMatch) return false;
-
-  const token = uuid.v4();
-  await AccessToken.create({
-    token,
-    user: user._id,
-    client: localClient.id,
-  });
-
-  return token;
-}));
-
-export default server;
-
-/*
-export const decision = server.decision();
-
-export const token = [
-  server.token(),
-  server.errorHandler(),
-];*/
+export function token() {
+  return compose([
+    isClientAuthenticated(),
+    async (ctx, next) => {
+      ctx.state.user = ctx.passport.user;
+      next();
+    },
+    server.token(),
+    server.errorHandler(),
+  ]);
+}

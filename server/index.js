@@ -8,6 +8,8 @@ import api from './api';
 
 const app = new Koa();
 
+app.keys = ['secret'];
+
 app.use(middleware());
 app.use(auth());
 app.use(api());

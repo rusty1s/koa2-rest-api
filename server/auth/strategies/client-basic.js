@@ -7,11 +7,11 @@ import { verifyHash } from '../../helpers/crypt';
 export default new BasicStrategy((id, secret, done) => {
   (async () => {
     try {
-      const client = await Client.findOne({id});
+      const client = await Client.findOne({ id });
 
       if (!client) return done(null, false);
 
-      const isMatch = await verifyHash(client.hashedSecret, secret);
+      const isMatch = await verifyHash(client.hashed_secret, secret);
       if (!isMatch) return done(null, false);
 
       return done(null, client);
