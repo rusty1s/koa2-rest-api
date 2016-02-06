@@ -12,20 +12,29 @@ const clientSchema = new mongoose.Schema({
   },
   id: {
     type: String,
+    unique: true,
     required: true,
+  },
+  grant: {
+    type: String,
+    required: true,
+    default: 'password',
   },
   hashedSecret: {
     type: String,
-    required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
   },
 }, {
   versionKey: false,
   timestamps: true,
+  toJSON: {
+    transform(doc, ret) {
+      delete ret._id;
+    },
+  },
 });
 
 clientSchema.plugin(idValidator);
