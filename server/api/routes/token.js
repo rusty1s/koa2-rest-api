@@ -9,7 +9,9 @@ export default (router) => {
     .get('/token',
       isBearerAuthenticated(),
       async ctx => {
-        const accessToken = await AccessToken.findOne({ user: ctx.passport.user._id });
+        const accessToken = await AccessToken.findOne({
+          user: ctx.passport.user._id,
+        });
         if (accessToken) {
           ctx.body = {
             access_token: accessToken,

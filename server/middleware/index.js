@@ -12,7 +12,7 @@ export default function middleware() {
   return compose([
     logger(),
     helmet(), // set HTTP headers (e.g. remove x-powered-by)
-    convert(cors()), // enable cors
+    convert(cors()),
     convert(bodyParser()),
     convert(session()),
   ]);

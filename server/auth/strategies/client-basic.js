@@ -2,7 +2,6 @@
 
 import { BasicStrategy } from 'passport-http';
 import Client from '../../models/client';
-import { verifyHash } from '../../helpers/crypt';
 
 export default new BasicStrategy((id, secret, done) => {
   (async () => {
@@ -11,8 +10,7 @@ export default new BasicStrategy((id, secret, done) => {
 
       if (!client) return done(null, false);
 
-      const isMatch = await verifyHash(client.hashed_secret, secret);
-      if (!isMatch) return done(null, false);
+      if (secret !== client.secret) return done(null, false);
 
       return done(null, client);
     } catch (error) {

@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     validate: validate({
       validator: 'isEmail',
-      message: 'Email address is not valid',
+      message: 'is not valid',
     }),
   },
   hashed_password: {
@@ -44,7 +44,12 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.virtual('password')
-  .set(function setPassword(value) { this._password = value; })
+  .set(function setPassword(value) {
+    this._password = value;
+    if (value.length < 5) {
+      this.invalidate('password', 'must be at least 5 characters');
+    }
+  })
   .get(function getPassword() { return this._password; });
 
 userSchema.pre('save', async function preSave(next) {
