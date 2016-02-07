@@ -30,6 +30,8 @@ server.exchange(
       client: client._id,
     });
 
+    console.log('haha');
+
     return accessToken;
   }));
 
@@ -38,7 +40,7 @@ export function token() {
     isClientAuthenticated(),
     async (ctx, next) => {
       ctx.state.user = ctx.passport.user;
-      next();
+      await next();
     },
     server.token(),
     server.errorHandler(),
