@@ -34,7 +34,7 @@ server.exchange(
     });
 
     return accessToken;
-  }));
+  }, test => console.log(test)));
 
 export function token() {
   return compose([

@@ -29,10 +29,14 @@ const clientSchema = new mongoose.Schema({
   },
 }, {
   versionKey: false,
-  timestamps: true,
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+  },
   toJSON: {
     transform(doc, ret) {
       delete ret._id;
+      delete ret.hashed_secret;
     },
   },
 });

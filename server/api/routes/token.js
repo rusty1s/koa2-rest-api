@@ -6,6 +6,18 @@ import { isBearerAuthenticated } from '../../auth';
 
 export default (router) => {
   router
+    .get('/token',
+      isBearerAuthenticated(),
+      async ctx => {
+        const accessToken = await AccessToken.findOne({ user: ctx.passport.user._id });
+        if (accessToken) {
+          ctx.body = {
+            access_token: accessToken,
+            token_type: 'Bearer',
+          };
+        }
+      }
+    )
     .post('/token', token())
     .delete('/token',
       isBearerAuthenticated(),

@@ -31,7 +31,16 @@ const userSchema = new mongoose.Schema({
   },
 }, {
   versionKey: false,
-  timestamps: true,
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+  },
+  toJSON: {
+    transform(doc, ret) {
+      delete ret._id;
+      delete ret.hashed_password;
+    },
+  },
 });
 
 userSchema.virtual('password')
