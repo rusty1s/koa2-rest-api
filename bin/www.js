@@ -1,7 +1,11 @@
 'use strict';
 
 import app from '../server';
-import { connectDatabase, registerLocalClient, registerAdminUser } from '../server/db';
+import {
+  connectDatabase,
+  registerLocalClient,
+  registerAdminUser,
+} from '../server/db';
 import { development } from '../server/db/config';
 
 const port = process.env.PORT || 3000;
