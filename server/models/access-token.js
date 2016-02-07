@@ -3,6 +3,8 @@
 import mongoose from 'mongoose';
 import idValidator from 'mongoose-id-validator';
 
+const duration = 3600;
+
 const accessTokenSchema = new mongoose.Schema({
   token: {
     type: String,
@@ -22,17 +24,27 @@ const accessTokenSchema = new mongoose.Schema({
   },
   created_at: {
     type: Date,
-    expires: 3600,
+    expires: duration,
     default: Date.now(),
   },
 }, {
   versionKey: false,
   toJSON: {
+    virtuals: true,
     transform(doc, ret) {
       delete ret._id;
+      delete ret.user;
+      delete ret.client;
+      delete ret.id;
     },
   },
 });
+
+accessTokenSchema.virtual('expires_in')
+  .get(function getExpiresIn() {
+    const expirationTime = this.created_at.getTime() + (duration * 1000);
+    return parseInt((expirationTime - Date.now()) / 1000, 10);
+  });
 
 accessTokenSchema.plugin(idValidator);
 

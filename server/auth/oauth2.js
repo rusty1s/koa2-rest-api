@@ -16,6 +16,8 @@ server.deserializeClient(async id => await Client.findById(id));
 
 server.exchange(
   oauth2orize.exchange.password(async (client, email, password) => {
+    if (client.grant_type !== 'password') return false;
+
     const user = await User.findOne({ email: email.toLowerCase() });
 
     if (!user) return false;
@@ -23,14 +25,13 @@ server.exchange(
     const isMatch = await verifyHash(user.hashed_password, password);
     if (!isMatch) return false;
 
-    const accessToken = uuid.v4();
-    await AccessToken.create({
-      token: accessToken,
+    await AccessToken.findOneAndRemove({ user: user._id });
+
+    const accessToken = await AccessToken.create({
+      token: uuid.v4(),
       user: user._id,
       client: client._id,
     });
-
-    console.log('haha');
 
     return accessToken;
   }));
