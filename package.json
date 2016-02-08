@@ -80,6 +80,7 @@
     "mongoose-id-validator": "^0.1.10",
     "mongoose-validator": "^1.2.4",
     "oauth2orize-koa": "^1.3.2",
+    "passport-facebook": "^2.1.0",
     "passport-http": "^0.3.0",
     "passport-http-bearer": "^1.0.1",
     "uuid": "^2.0.1"

@@ -38,3 +38,7 @@ export function isClientAuthenticated() {
 export function isBearerAuthenticated() {
   return passport.authenticate('bearer', { session: false });
 }
+
+export function isFacebookAuthenticated() {
+  return passport.authenticate('facebook');
+}
