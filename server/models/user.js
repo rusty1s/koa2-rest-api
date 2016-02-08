@@ -29,6 +29,11 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: false,
   },
+  provider: {
+    type: String,
+    required: true,
+    default: 'local',
+  },
 }, {
   versionKey: false,
   timestamps: {
@@ -44,12 +49,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.virtual('password')
-  .set(function setPassword(value) {
-    this._password = value;
-    if (value.length < 5) {
-      this.invalidate('password', 'must be at least 5 characters');
-    }
-  })
+  .set(function setPassword(value) { this._password = value; })
   .get(function getPassword() { return this._password; });
 
 userSchema.pre('save', async function preSave(next) {

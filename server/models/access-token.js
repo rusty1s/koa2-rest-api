@@ -1,6 +1,7 @@
 'use strict';
 
 import mongoose from 'mongoose';
+import uid from 'uid';
 import idValidator from 'mongoose-id-validator';
 
 const duration = 3600;
@@ -10,6 +11,7 @@ const accessTokenSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true,
+    default: uid(194),
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -20,7 +22,6 @@ const accessTokenSchema = new mongoose.Schema({
   client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Client',
-    required: true,
   },
   created_at: {
     type: Date,

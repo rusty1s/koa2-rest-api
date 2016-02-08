@@ -1,7 +1,7 @@
 'use strict';
 
 import mongoose from 'mongoose';
-import uuid from 'uuid';
+import uid from 'uid';
 import idValidator from 'mongoose-id-validator';
 
 const clientSchema = new mongoose.Schema({
@@ -14,12 +14,12 @@ const clientSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true,
-    default: uuid.v4(),
+    default: uid(16),
   },
   secret: {
     type: String,
     required: true,
-    default: uuid.v4(),
+    default: uid(32),
   },
   grant_type: {
     type: String,
@@ -46,3 +46,4 @@ const clientSchema = new mongoose.Schema({
 clientSchema.plugin(idValidator);
 
 export default mongoose.model('Client', clientSchema);
+

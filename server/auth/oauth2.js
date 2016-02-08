@@ -4,7 +4,6 @@ import oauth2orize from 'oauth2orize-koa';
 import Client from '../models/client';
 import User from '../models/user';
 import AccessToken from '../models/access-token';
-import uuid from 'uuid';
 import compose from 'koa-compose';
 import { verifyHash } from '../helpers/crypt';
 import { isClientAuthenticated } from '../auth';
@@ -27,14 +26,11 @@ server.exchange(
 
     await AccessToken.findOneAndRemove({ user: user._id });
 
-    const accessToken = await AccessToken.create({
-      token: uuid.v4(),
+    return await AccessToken.create({
       user: user._id,
       client: client._id,
     });
-
-    return accessToken;
-  }, test => console.log(test)));
+  }));
 
 export function token() {
   return compose([

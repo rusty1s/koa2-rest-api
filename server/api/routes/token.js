@@ -32,7 +32,15 @@ export default (router) => {
     );
 
   router.get('/auth/facebook', isFacebookAuthenticated());
-  router.get('/auth/facebook/callback', ctx => {
-    ctx.body = ctx.request;
-  };
+  router.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    async ctx => {
+
+      const accessToken = await AccessToken.findOne({ user: ctx.passport.user._id });
+
+      ctx.body = {
+        access_token: accessToken,
+        token_type: 'Bearer',
+      };
+    });
 };
