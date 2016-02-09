@@ -52,4 +52,3 @@ clientSchema.pre('validate', function preSave(next) {
 });
 
 export default mongoose.model('Client', clientSchema);
-

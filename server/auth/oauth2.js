@@ -26,16 +26,10 @@ server.exchange(
 
     await AccessToken.findOneAndRemove({ user: user._id });
 
-    console.log(AccessToken({
-
-    }));
-
     const accessToken = await AccessToken.create({
       user: user._id,
       client: client._id,
     });
-
-
 
     return accessToken;
   }));
