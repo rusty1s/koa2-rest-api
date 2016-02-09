@@ -11,7 +11,6 @@ const accessTokenSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true,
-    default: uid(194),
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -26,7 +25,6 @@ const accessTokenSchema = new mongoose.Schema({
   created_at: {
     type: Date,
     expires: duration,
-    default: Date.now(),
   },
 }, {
   versionKey: false,
@@ -48,5 +46,13 @@ accessTokenSchema.virtual('expires_in')
   });
 
 accessTokenSchema.plugin(idValidator);
+
+accessTokenSchema.pre('validate', function preSave(next) {
+  if (this.isNew) {
+    this.token = uid(194);
+    this.created_at = Date.now();
+  }
+  next();
+});
 
 export default mongoose.model('AccessToken', accessTokenSchema);

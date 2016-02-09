@@ -14,12 +14,10 @@ const clientSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true,
-    default: uid(16),
   },
   secret: {
     type: String,
     required: true,
-    default: uid(32),
   },
   grant_type: {
     type: String,
@@ -44,6 +42,14 @@ const clientSchema = new mongoose.Schema({
 });
 
 clientSchema.plugin(idValidator);
+
+clientSchema.pre('validate', function preSave(next) {
+  if (this.isNew) {
+    if (!this.id) this.id = uid(16);
+    if (!this.id) this.secret = uid(32);
+  }
+  next();
+});
 
 export default mongoose.model('Client', clientSchema);
 

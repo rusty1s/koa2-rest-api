@@ -5,7 +5,7 @@ import Client from '../models/client';
 import User from '../models/user';
 import AccessToken from '../models/access-token';
 import compose from 'koa-compose';
-import { verifyHash } from '../helpers/crypt';
+import bcrypt from 'bcrypt-as-promised';
 import { isClientAuthenticated } from '../auth';
 
 const server = oauth2orize.createServer();
@@ -21,15 +21,23 @@ server.exchange(
 
     if (!user) return false;
 
-    const isMatch = await verifyHash(user.hashed_password, password);
+    const isMatch = await bcrypt.compare(password, user.hashed_password);
     if (!isMatch) return false;
 
     await AccessToken.findOneAndRemove({ user: user._id });
 
-    return await AccessToken.create({
+    console.log(AccessToken({
+
+    }));
+
+    const accessToken = await AccessToken.create({
       user: user._id,
       client: client._id,
     });
+
+
+
+    return accessToken;
   }));
 
 export function token() {

@@ -2,7 +2,8 @@
 
 import mongoose from 'mongoose';
 import validate from 'mongoose-validator';
-import { encrypt } from '../helpers/crypt';
+import bcrypt from 'bcrypt-as-promised';
+import * as provider from '../auth/config';
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -32,6 +33,7 @@ const userSchema = new mongoose.Schema({
   provider: {
     type: String,
     required: true,
+    enum: ['local', ...Object.keys(provider)],
     default: 'local',
   },
 }, {
@@ -56,7 +58,7 @@ userSchema.pre('save', async function preSave(next) {
   if (!this.password) return next();
 
   try {
-    this.hashed_password = await encrypt(this.password);
+    this.hashed_password = await bcrypt.hash(this.password);
     next();
   } catch (error) {
     next(error);
