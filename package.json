@@ -63,7 +63,6 @@
     "supertest-as-promised": "*"
   },
   "dependencies": {
-    "bcrypt": "^0.8.5",
     "bcrypt-as-promised": "^1.1.0",
     "import-dir": "0.0.1",
     "kerberos": "0.0.18",
@@ -85,6 +84,5 @@
     "passport-http": "^0.3.0",
     "passport-http-bearer": "^1.0.1",
     "uid": "0.0.2",
-    "uuid": "^2.0.1"
   }
 }
