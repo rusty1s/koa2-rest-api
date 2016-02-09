@@ -42,3 +42,7 @@ export function isBearerAuthenticated() {
 export function isFacebookAuthenticated() {
   return passport.authenticate('facebook', { scope: ['email'] });
 }
+
+export function isFacebookAuthenticatedCallback() {
+  return passport.authenticate('facebook', { failureRedirect: '/login' });
+}

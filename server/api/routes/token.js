@@ -1,10 +1,7 @@
 'use strict';
 
-import { token } from '../../auth/oauth2';
 import AccessToken from '../../models/access-token';
-import { isBearerAuthenticated, isFacebookAuthenticated } from '../../auth';
-
-import passport from 'koa-passport';
+import { isBearerAuthenticated } from '../../auth';
 
 export default (router) => {
   router
@@ -22,7 +19,6 @@ export default (router) => {
         }
       }
     )
-    .post('/token', token())
     .delete('/token',
       isBearerAuthenticated(),
       async ctx => {
@@ -30,18 +26,4 @@ export default (router) => {
         ctx.status = 204;
       }
     );
-
-  router.get('/auth/facebook', isFacebookAuthenticated());
-  router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
-    async ctx => {
-      const accessToken = await AccessToken.findOne({
-        user: ctx.passport.user._id,
-      });
-
-      ctx.body = {
-        access_token: accessToken,
-        token_type: 'Bearer',
-      };
-    });
 };
