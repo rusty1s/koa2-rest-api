@@ -19,9 +19,10 @@ const clientSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  grant_type: {
-    type: String,
+  trusted: {
+    type: Boolean,
     required: true,
+    default: false,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

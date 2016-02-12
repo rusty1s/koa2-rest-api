@@ -26,7 +26,7 @@ export async function registerLocalClient() {
             name: localClient.name,
             id: localClient.id,
             secret: localClient.secret,
-            grant_type: 'password',
+            trusted: true,
           });
         }
         resolve();
@@ -47,6 +47,7 @@ export async function registerAdminUser() {
             name: adminUser.name,
             email: adminUser.email,
             password: adminUser.password,
+            confirm_password: adminUser.password,
             admin: true,
           });
         }

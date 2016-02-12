@@ -18,9 +18,13 @@ const port = process.env.PORT || 3000;
     console.error('Unable to connect to database');
   }
 
-  await registerLocalClient();
-  await registerAdminUser();
+  try {
+    await registerLocalClient();
+    await registerAdminUser();
 
-  await app.listen(port);
-  console.log(`Server started on port ${port}`);
+    await app.listen(port);
+    console.log(`Server started on port ${port}`);
+  } catch (error) {
+    console.log(error);
+  }
 })();

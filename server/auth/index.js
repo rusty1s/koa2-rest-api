@@ -41,16 +41,18 @@ export function isBearerAuthenticated() {
   return passport.authenticate('bearer', { session: false });
 }
 
+const facebookCallbackURL = prefix + provider.facebook.callbackRoute;
+
 export function isFacebookAuthenticated() {
   return passport.authenticate('facebook', {
     scope: ['email'],
-    callbackURL: prefix + provider.facebook.callbackRoute,
+    callbackURL: facebookCallbackURL,
   });
 }
 
 export function isFacebookAuthenticatedCallback() {
   return passport.authenticate('facebook', {
     failureRedirect: '/login',
-    callbackURL: prefix + provider.facebook.callbackRoute,
+    callbackURL: facebookCallbackURL,
   });
 }

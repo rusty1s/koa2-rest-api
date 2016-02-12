@@ -15,7 +15,7 @@ server.deserializeClient(async id => await Client.findById(id));
 
 server.exchange(
   oauth2orize.exchange.password(async (client, email, password) => {
-    if (client.grant_type !== 'password') return false;
+    if (!client.trusted) return false;
 
     const user = await User.findOne({ email: email.toLowerCase() });
 
