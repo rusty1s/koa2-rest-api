@@ -4,6 +4,8 @@ import passport from 'koa-passport';
 import compose from 'koa-compose';
 import importDir from 'import-dir';
 import User from '../models/user';
+import { prefix } from '../api/config';
+import * as provider from './provider';
 
 const strategies = importDir('./strategies');
 
@@ -40,9 +42,15 @@ export function isBearerAuthenticated() {
 }
 
 export function isFacebookAuthenticated() {
-  return passport.authenticate('facebook', { scope: ['email'] });
+  return passport.authenticate('facebook', {
+    scope: ['email'],
+    callbackURL: prefix + provider.facebook.callbackRoute,
+  });
 }
 
 export function isFacebookAuthenticatedCallback() {
-  return passport.authenticate('facebook', { failureRedirect: '/login' });
+  return passport.authenticate('facebook', {
+    failureRedirect: '/login',
+    callbackURL: prefix + provider.facebook.callbackRoute,
+  });
 }

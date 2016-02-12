@@ -15,10 +15,13 @@ export default (router) => {
         password: ctx.request.body.password,
       });
     })
-    .get('/users/:id', async ctx => {
-      const user = await User.findById(ctx.params.id);
-      if (user) ctx.body = user;
-    })
+    .get('/users/:id',
+      isBearerAuthenticated(),
+      async ctx => {
+        const user = await User.findById(ctx.params.id);
+        if (user) ctx.body = user;
+      }
+    )
     .put('/users/:id', async ctx => {
       const user = await User.findByIdAndUpdate(ctx.params.id, {
         name: ctx.request.body.name,
@@ -28,8 +31,11 @@ export default (router) => {
       });
       if (user) ctx.body = user;
     })
-    .delete('/users/:id', async ctx => {
-      const user = await User.findByIdAndRemove(ctx.params.id);
-      if (user) ctx.status = 204;
-    });
+    .delete('/users/:id',
+      isBearerAuthenticated(),
+      async ctx => {
+        const user = await User.findByIdAndRemove(ctx.params.id);
+        if (user) ctx.status = 204;
+      }
+    );
 };

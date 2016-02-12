@@ -1,14 +1,13 @@
 'use strict';
 
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-import { facebook } from '../config';
+import { facebook } from '../provider';
 import User from '../../models/user';
 import AccessToken from '../../models/access-token';
 
 export default new FacebookStrategy({
   clientID: facebook.clientId,
   clientSecret: facebook.clientSecret,
-  callbackURL: facebook.callbackUrl,
   profileFields: ['displayName', 'email'],
 }, (accessToken, refreshToken, profile, done) => {
   (async () => {

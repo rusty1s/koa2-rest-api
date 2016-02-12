@@ -2,4 +2,4 @@
 npm-debug.log
 .idea
 node_modules
-server/auth/config.js
+server/auth/provider.js

@@ -6,14 +6,15 @@ import {
   isFacebookAuthenticated,
   isFacebookAuthenticatedCallback,
 } from '../../auth';
+import * as provider from '../../auth/provider';
 
 export default (router) => {
   router
     .post('/auth', token());
 
   router
-    .get('/auth/facebook', isFacebookAuthenticated())
-    .get('/auth/facebook/callback',
+    .get(provider.facebook.route, isFacebookAuthenticated())
+    .get(provider.facebook.callbackRoute,
       isFacebookAuthenticatedCallback(),
       async ctx => {
         const accessToken = await AccessToken.findOne({

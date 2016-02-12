@@ -3,7 +3,7 @@
 import mongoose from 'mongoose';
 import validate from 'mongoose-validator';
 import bcrypt from 'bcrypt-as-promised';
-import * as provider from '../auth/config';
+import * as provider from '../auth/provider';
 
 const userSchema = new mongoose.Schema({
   name: {
