@@ -60,7 +60,7 @@ userSchema.virtual('confirm_password')
 
 userSchema.pre('validate', function preValidate(next) {
   if (this.provider !== 'local') return next();
-  
+
   if (!this.hashed_password && !this.password) {
     this.invalidate('password', 'is required');
   } else if (this.password.length < 6) {

@@ -13,6 +13,7 @@ export default (router) => {
         name: ctx.request.body.name,
         email: ctx.request.body.email,
         password: ctx.request.body.password,
+        confirm_password: ctx.request.body.confirm_password,
       });
     })
     .get('/users/:id',
