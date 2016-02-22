@@ -12,6 +12,6 @@ export const localClient = {
 
 export const adminUser = {
   name: 'Admin',
-  email: 'matthias.fey@tu-dortmund.dee',
+  email: 'matthias.fey@tu-dortmund.de',
   password: 'adminadmin',
 };

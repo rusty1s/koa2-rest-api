@@ -5,8 +5,8 @@ export default function testUsers(request) {
     it('should create user', async () => {
       await request.post('/api/users')
         .send({
-          name: 'Matthias Fey',
-          email: 'matthias.fey@tu-dortmund.de',
+          name: 'Test User',
+          email: 'test.user@gmail.com',
           password: 'secret',
           confirm_password: 'secret',
         })

@@ -6,7 +6,6 @@ import { isBearerAuthenticated } from '../../auth';
 export default (router) => {
   router
     .get('/users',
-      isBearerAuthenticated(),
       async ctx => ctx.body = await User.find({}))
     .post('/users', async ctx => {
       ctx.body = await User.create({
