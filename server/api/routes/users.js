@@ -16,7 +16,6 @@ export default (router) => {
       });
     })
     .get('/users/:id',
-      isBearerAuthenticated(),
       async ctx => {
         const user = await User.findById(ctx.params.id);
         if (user) ctx.body = user;
