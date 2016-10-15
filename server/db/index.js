@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 import { localClient, adminUser } from './config';
-import Client from '..//models/client';
+import Client from '../models/client';
 import User from '../models/user';
 
 export function connectDatabase(uri) {
